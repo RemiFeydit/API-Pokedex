@@ -32,4 +32,9 @@
   "_id": "api@1.0.0",
   "license": "ISC",
   "readme": "ERROR: No README data found!"
+  "dependencies": {
+    "express": "^4.17.1",
+    "sequelize": "^5.21.6",
+    "sqlite3": "^4.1.1"
+  }
 }
