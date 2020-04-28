@@ -43,4 +43,4 @@ try {
     console.error('Unable to connect to the database:', error);
 }
 
-app.listen(8000)
+app.listen(3000)
