@@ -1,10 +1,16 @@
 const express = require('express')
-const Sequelize = require('sequelize');
+const {Op, Sequelize} = require('sequelize');
 
 
 const app = express();
 
-const sequelize = new Sequelize('sqlite:pokedex.db')
+const sequelize = new Sequelize('sqlite:pokedex.db', {
+    define: {
+        charset: 'utf8',
+        collate: 'utf8_general_ci', 
+        timestamps: true
+      },
+})
 
 const Pokemons = sequelize.define('pokemon',
 {
@@ -35,6 +41,23 @@ app.get('/api/pokemons', function(request, response) {
         response.json(pokemons)
     })
 })
+
+
+app.get('/api/pokemons/type/:type', function(req, response) {
+    Pokemons.findAll({
+        where: {
+          [Op.or]: [
+            Sequelize.where(Sequelize.fn('lower', sequelize.col('type1')), req.params.type),
+            Sequelize.where(Sequelize.fn('lower', sequelize.col('type2')), req.params.type),
+          ]
+        }
+      }).then((pokemons) =>{
+            console.log(req.params.type)
+            response.json(pokemons)
+      });
+      
+})
+
 
 try {
     sequelize.authenticate();
