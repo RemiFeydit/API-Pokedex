@@ -90,4 +90,8 @@ app.get('/api/types', function(req, res) {
     })
 })
 
+app.get('*', function(req, res){
+    res.status(404).send("Page introuvable??")
+  });
+
 app.listen(3000)
