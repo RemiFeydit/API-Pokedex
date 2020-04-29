@@ -35,15 +35,29 @@ const Pokemons = sequelize.define('pokemon',
     timestamps: false
 });
 
+const Types = sequelize.define('type',
+{
+    id: {
+        field: 'id',
+        type: Sequelize.INTEGER,
+        primaryKey: true
+    },
+    name: {
+        field: 'name',
+        type: Sequelize.STRING,
+    },
+}, {
+    timestamps: false
+});
 
-app.get('/api/pokemons', function(request, response) {
+
+app.get('/api/pokemons', function(req, res) {
     Pokemons.findAll().then((pokemons) =>{
-        response.json(pokemons)
+        res.json(pokemons)
     })
 })
 
-
-app.get('/api/pokemons/type/:type', function(req, response) {
+app.get('/api/pokemons/types/:type', function(req, res) {
     Pokemons.findAll({
         where: {
           [Op.or]: [
@@ -52,18 +66,18 @@ app.get('/api/pokemons/type/:type', function(req, response) {
           ]
         }
       }).then((pokemons) =>{
-            console.log(req.params.type)
-            response.json(pokemons)
-      });
-      
+          if (pokemons.length === 0){
+              console.log("error")
+              res.send("Le type entré n'est pas reconnu")
+          }else
+            res.json(pokemons)
+      })
+}),
+
+app.get('/api/types', function(req, res) {
+    Types.findAll().then((types) =>{
+        res.json(types)
+    })
 })
-
-
-try {
-    sequelize.authenticate();
-    console.log('Connection has been established successfully.');
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
-}
 
 app.listen(3000)
