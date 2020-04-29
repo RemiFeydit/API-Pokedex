@@ -57,8 +57,8 @@ app.get('/api/pokemons', function(req, res) {
     })
 })
 
-app.get('/api/pokemon/:idPokemon', function(req, res) {
-    Pokemons.findOne({ where: {id: req.params.idPokemon }
+app.get('/api/pokemon/:numPokemon', function(req, res) {
+    Pokemons.findOne({ where: {pokedexNumber: req.params.numPokemon }
     }).then((pokemon) =>{
         if (pokemon === null){
             res.json({error: "L'id rentré n'existe pas"})
