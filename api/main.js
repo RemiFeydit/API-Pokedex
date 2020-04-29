@@ -57,6 +57,17 @@ app.get('/api/pokemons', function(req, res) {
     })
 })
 
+app.get('/api/pokemon/:idPokemon', function(req, res) {
+    Pokemons.findOne({ where: {id: req.params.idPokemon }
+    }).then((pokemon) =>{
+        if (pokemon === null){
+            res.json({error: "L'id rentré n'existe pas"})
+        }else{
+            res.json(pokemon)
+        }
+    })
+})
+
 app.get('/api/pokemons/types/:type', function(req, res) {
     Pokemons.findAll({
         where: {
@@ -67,8 +78,7 @@ app.get('/api/pokemons/types/:type', function(req, res) {
         }
       }).then((pokemons) =>{
           if (pokemons.length === 0){
-              console.log("error")
-              res.send("Le type entré n'est pas reconnu")
+              res.json({error: "Le type entré n'est pas reconnu"})
           }else
             res.json(pokemons)
       })
