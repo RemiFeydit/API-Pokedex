@@ -19,6 +19,10 @@ const Pokemons = sequelize.define('pokemon',
         type: Sequelize.INTEGER,
         primaryKey: true
     },
+    pokedexNumber: {
+        field: 'pokedexNumber',
+        type: Sequelize.STRING,
+    },
     name: {
         field: 'name',
         type: Sequelize.STRING,
