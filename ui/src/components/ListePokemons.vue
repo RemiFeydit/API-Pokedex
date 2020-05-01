@@ -3,7 +3,7 @@
     <button @click="debug">debug</button>
     <div class="row">
       <select v-model="selected" class="col s2">
-        <option disabled value>Please select one</option>
+        <option disabled value>Trier par type</option>
         <option v-for="(type) in listeTypes" :key="type.id">{{ type.name }}</option>
       </select>
       <select v-model="filtreRecherche" class="col s2 offset-s1">
