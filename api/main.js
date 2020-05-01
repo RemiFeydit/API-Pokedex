@@ -64,11 +64,23 @@ app.get('/api/pokemons', function (req, res) {
     })
 })
 
-app.get('/api/pokemon/:numPokemon', function(req, res) {
-    Pokemons.findOne({ where: {pokedexNumber: req.params.numPokemon }
+app.get('/api/pokemon/num/:pkmnNum', function(req, res) {
+    Pokemons.findOne({ where: {pokedexNumber: req.params.pkmnNum }
     }).then((pokemon) =>{
         if (pokemon === null){
             res.json({error: "L'id rentré n'existe pas"})
+        }else{
+            res.json(pokemon)
+        }
+    })
+})
+
+app.get('/api/pokemon/name/:pkmnName', function(req, res) {
+    Pokemons.findOne({ where: 
+        Sequelize.where(Sequelize.fn('lower', sequelize.col('name')), req.params.pkmnName)
+    }).then((pokemon) =>{
+        if (pokemon === null){
+            res.json({error: "Le nom rentré n'existe pas"})
         }else{
             res.json(pokemon)
         }
@@ -91,11 +103,11 @@ app.get('/api/pokemons/types/:type', function (req, res) {
     })
 }),
 
-    app.get('/api/types', function (req, res) {
-        Types.findAll().then((types) => {
-            res.json(types)
-        })
+app.get('/api/types', function (req, res) {
+    Types.findAll().then((types) => {
+        res.json(types)
     })
+})
 
 app.get('*', function (req, res) {
     res.status(404).send("Page introuvable??")
