@@ -5,6 +5,17 @@ const Pokemons = require("./models/pokemon")
 const app = express();
 const Types = require("./models/type")
 
+const bodyParser = require('body-parser')
+
+app.use(
+    bodyParser.urlencoded({
+        extended: true
+    })
+)
+
+app.use(bodyParser.json())
+
+
 app.use(cors());
 
 app.use(express.urlencoded({ extended: true }));
@@ -59,15 +70,16 @@ app.get('/api/pokemons/types/:type', function (req, res) {
     })
 }),
 
-app.get('/api/types', function (req, res) {
-    Types.findAll().then((types) => {
-        res.json(types)
+    app.get('/api/types', function (req, res) {
+        Types.findAll().then((types) => {
+            res.json(types)
+        })
     })
-})
 
 app.post('/add/pokemon', (req, res) => {
     console.log(req.body);
     console.log("yolo");
+    console.log(req.body.pokedexNumber);
     if (req.body.type2 == "") {
         console.log("oui")
         req.body.type2 = null
