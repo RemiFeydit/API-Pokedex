@@ -6,7 +6,8 @@ const Pokemons = sequelize.define('pokemon',
         id: {
             field: 'id',
             type: Sequelize.INTEGER,
-            primaryKey: true
+            primaryKey: true,
+            autoIncrement: true
         },
         pokedexNumber: {
             field: 'pokedexNumber',
@@ -24,9 +25,7 @@ const Pokemons = sequelize.define('pokemon',
             field: 'type2',
             type: Sequelize.STRING,
         },
-    }, {
-    timestamps: false
-});
+    });
 
 
 module.exports = Pokemons

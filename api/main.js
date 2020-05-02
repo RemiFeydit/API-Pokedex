@@ -2,10 +2,11 @@ const express = require('express');
 const cors = require('cors');
 const { Op, Sequelize } = require('sequelize');
 const Pokemons = require("./models/pokemon")
-
 const app = express();
 
 app.use(cors());
+
+app.use(express.urlencoded({extended: true}));
 
 app.get('/api/pokemons', function (req, res) {
     Pokemons.findAll({
@@ -61,6 +62,18 @@ app.get('/api/types', function (req, res) {
         res.json(types)
     })
 })
+
+app.post('/add/pokemon', (req, res) => {
+    if(req.body.type2 == ""){
+        req.body.type2 = null
+    }
+    Pokemons.create({
+        pokedexNumber: req.body.pokedexNumber,
+        name: req.body.name,
+        type1: req.body.type1,
+        type2: req.body.type2
+    }).then(submittedPokemon => res.send(submittedPokemon));
+});
 
 app.get('*', function (req, res) {
     res.status(404).send("Page introuvable??")
