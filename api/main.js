@@ -32,7 +32,7 @@ app.get('/api/pokemon/num/:pkmnNum', function (req, res) {
     Pokemons.findAll({
         where: {
             pokedexNumber: {
-                [Op.like]: req.params.pkmnNum +'%'
+                [Op.like]: req.params.pkmnNum + '%'
             }
         },
         order: ["pokedexNumber"],
@@ -45,7 +45,7 @@ app.get('/api/pokemon/name/:pkmnName', function (req, res) {
     Pokemons.findAll({
         where: {
             name: {
-                [Op.like]: req.params.pkmnName +'%'
+                [Op.like]: req.params.pkmnName + '%'
             }
         },
         order: ["pokedexNumber"],
@@ -77,9 +77,6 @@ app.get('/api/pokemons/types/:type', function (req, res) {
     })
 
 app.post('/add/pokemon', (req, res) => {
-    console.log(req.body);
-    console.log("yolo");
-    console.log(req.body.pokedexNumber);
     if (req.body.type2 == "") {
         console.log("oui")
         req.body.type2 = null
