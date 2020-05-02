@@ -35,8 +35,9 @@ export default {
             type2: this.addType2
           }
         })
-        .then(() => {
-          console.log("ça marche");
+        .then(res => {
+          console.log(`statusCode: ${res.statusCode}`);
+          console.log(res);
         })
         .catch(error => {
           console.error(error);

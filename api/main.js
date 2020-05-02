@@ -3,10 +3,11 @@ const cors = require('cors');
 const { Op, Sequelize } = require('sequelize');
 const Pokemons = require("./models/pokemon")
 const app = express();
+const Types = require("./models/type")
 
 app.use(cors());
 
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/api/pokemons', function (req, res) {
     Pokemons.findAll({
@@ -57,14 +58,16 @@ app.get('/api/pokemons/types/:type', function (req, res) {
     })
 }),
 
-app.get('/api/types', function (req, res) {
-    Types.findAll().then((types) => {
-        res.json(types)
+    app.get('/api/types', function (req, res) {
+        Types.findAll().then((types) => {
+            res.json(types)
+        })
     })
-})
 
 app.post('/add/pokemon', (req, res) => {
-    if(req.body.type2 == ""){
+    console.log(req.body);
+    console.log("yolo");
+    if (req.body.type2 == "") {
         console.log("oui")
         req.body.type2 = null
     }

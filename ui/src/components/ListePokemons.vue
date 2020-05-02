@@ -10,8 +10,12 @@
         <option disabled value>Rechercher par:</option>
         <option v-for="(filtre) in listeFiltre" :key="filtre.value">{{ filtre.text }}</option>
       </select>
-      <input v-model="inputPokemonSearch" :placeholder="rechercherPar" class="col s2" />
-      <button class="btn" @click="rechercherPokemon">Rechercher</button>
+      <input
+        v-model="inputPokemonSearch"
+        :placeholder="rechercherPar"
+        class="col s2"
+        @input="rechercherPokemon"
+      />
     </div>
 
     <br />
@@ -79,6 +83,8 @@ export default {
     rechercherPokemon: function() {
       if (this.filtreRecherche == "") {
         alert("Veuillez selectionner un filtre de recherche");
+      } else if (this.inputPokemonSearch == "") {
+        this.$store.commit("getPokemons", [null]);
       } else {
         this.selected = "";
         this.$store.commit("getPokemons", [
