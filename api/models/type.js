@@ -15,3 +15,5 @@ const Types = sequelize.define('type',
     }, {
     timestamps: false
 });
+
+module.exports = Types

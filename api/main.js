@@ -58,11 +58,11 @@ app.get('/api/pokemons/types/:type', function (req, res) {
     })
 }),
 
-    app.get('/api/types', function (req, res) {
-        Types.findAll().then((types) => {
-            res.json(types)
-        })
+app.get('/api/types', function (req, res) {
+    Types.findAll().then((types) => {
+        res.json(types)
     })
+})
 
 app.post('/add/pokemon', (req, res) => {
     console.log(req.body);
