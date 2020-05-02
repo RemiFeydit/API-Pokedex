@@ -6,6 +6,17 @@ const app = express();
 const Types = require("./models/type")
 const Team = require('./models/equipe')
 
+const bodyParser = require('body-parser')
+
+app.use(
+    bodyParser.urlencoded({
+        extended: true
+    })
+)
+
+app.use(bodyParser.json())
+
+
 app.use(cors());
 
 app.use(express.urlencoded({ extended: true }));
@@ -22,7 +33,7 @@ app.get('/api/pokemon/num/:pkmnNum', function (req, res) {
     Pokemons.findAll({
         where: {
             pokedexNumber: {
-                [Op.like]: req.params.pkmnNum +'%'
+                [Op.like]: req.params.pkmnNum + '%'
             }
         },
         order: ["pokedexNumber"],
@@ -35,7 +46,7 @@ app.get('/api/pokemon/name/:pkmnName', function (req, res) {
     Pokemons.findAll({
         where: {
             name: {
-                [Op.like]: req.params.pkmnName +'%'
+                [Op.like]: req.params.pkmnName + '%'
             }
         },
         order: ["pokedexNumber"],
@@ -60,11 +71,11 @@ app.get('/api/pokemons/types/:type', function (req, res) {
     })
 }),
 
-app.get('/api/types', function (req, res) {
-    Types.findAll().then((types) => {
-        res.json(types)
+    app.get('/api/types', function (req, res) {
+        Types.findAll().then((types) => {
+            res.json(types)
+        })
     })
-})
 
 app.post('/add/pokemon', (req, res) => {
     if (req.body.type2 == "") {

@@ -28,16 +28,15 @@ export default {
 
       axios
         .post("http://localhost:3000/add/pokemon", {
-          body: {
-            pokedexNumber: this.addNumber,
-            name: this.addName,
-            type1: this.addType1,
-            type2: this.addType2
-          }
+          pokedexNumber: this.addNumber,
+          name: this.addName,
+          type1: this.addType1,
+          type2: this.addType2
         })
         .then(res => {
           console.log(`statusCode: ${res.statusCode}`);
           console.log(res);
+          alert("ok");
         })
         .catch(error => {
           console.error(error);
