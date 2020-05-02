@@ -4,8 +4,14 @@
     <div class="row">
       <input v-model="addNumber" placeholder="Numero pokedex" class="col s2" name="pokedexNumber" />
       <input v-model="addName" placeholder="Nom Pokemon" class="col s2" name="name" />
-      <input v-model="addType1" placeholder="Type 1" class="col s2" name="type1" />
-      <input v-model="addType2" placeholder="Type 2" class="col s2" name="type2" />
+      <select v-model="addType1" class="col s2">
+        <option disabled value>Type 1</option>
+        <option v-for="(type) in listeTypes" :key="type.id">{{ type.name }}</option>
+      </select>
+      <select v-model="addType2" class="col s2">
+        <option disabled value>Type 2</option>
+        <option v-for="(type) in listeTypes" :key="type.id">{{ type.name }}</option>
+      </select>
       <button @click="addPokemon" class="btn">Ajouter</button>
     </div>
   </div>
@@ -22,6 +28,14 @@ export default {
       addType2: ""
     };
   },
+  created() {
+    this.$store.commit("getTypes", null);
+  },
+  computed: {
+    listeTypes: function() {
+      return this.$store.state.listeTypes;
+    }
+  },
   methods: {
     addPokemon: function() {
       const axios = require("axios");
@@ -33,10 +47,12 @@ export default {
           type1: this.addType1,
           type2: this.addType2
         })
-        .then(res => {
-          console.log(`statusCode: ${res.statusCode}`);
-          console.log(res);
-          alert("ok");
+        .then(() => {
+          this.addNumbern = "";
+          this.addName = "";
+          this.addType1 = "";
+          this.addType2 = "";
+          this.$store.commit("getPokemons", [null]);
         })
         .catch(error => {
           console.error(error);

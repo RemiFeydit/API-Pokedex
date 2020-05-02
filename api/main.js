@@ -8,18 +8,10 @@ const Team = require('./models/equipe')
 
 const bodyParser = require('body-parser')
 
-app.use(
-    bodyParser.urlencoded({
-        extended: true
-    })
-)
-
-app.use(bodyParser.json())
-
-
 app.use(cors());
 
 app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json())
 
 app.get('/api/pokemons', function (req, res) {
     Pokemons.findAll({

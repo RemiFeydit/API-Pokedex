@@ -33,10 +33,10 @@ export default new Vuex.Store({
         state.listePokemons = dataPokemon.data;
       } else if (val[0] === "Numéro Pokédex") {
         let dataPokemon = await axios.get(`http://localhost:3000/api/pokemon/num/${val[1]}`);
-        state.listePokemons = [dataPokemon.data];
+        state.listePokemons = dataPokemon.data;
       } else {
         let dataPokemon = await axios.get(`http://localhost:3000/api/pokemon/name/${val[1]}`);
-        state.listePokemons = [dataPokemon.data];
+        state.listePokemons = dataPokemon.data;
       }
     },
 
