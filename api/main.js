@@ -63,7 +63,7 @@ app.get('/api/types', function (req, res) {
     })
 })
 
-app.post('/add/pokemon', (req, res) => {
+app.post('api/add/pokemon', (req, res) => {
     if(req.body.type2 == ""){
         req.body.type2 = null
     }
