@@ -1,5 +1,6 @@
 const sequelize = require('../database/sequelize')
 const Sequelize = require("sequelize")
+const Team = require('./equipe')
 
 const Pokemons = sequelize.define('pokemon',
     {
@@ -25,7 +26,6 @@ const Pokemons = sequelize.define('pokemon',
             field: 'type2',
             type: Sequelize.STRING,
         },
-    });
-
+});
 
 module.exports = Pokemons

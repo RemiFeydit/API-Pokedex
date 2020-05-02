@@ -4,6 +4,7 @@ const { Op, Sequelize } = require('sequelize');
 const Pokemons = require("./models/pokemon")
 const app = express();
 const Types = require("./models/type")
+const Team = require('./models/equipe')
 
 app.use(cors());
 
@@ -66,10 +67,7 @@ app.get('/api/types', function (req, res) {
 })
 
 app.post('/add/pokemon', (req, res) => {
-    console.log(req.body);
-    console.log("yolo");
     if (req.body.type2 == "") {
-        console.log("oui")
         req.body.type2 = null
     }
     Pokemons.create({
@@ -78,6 +76,19 @@ app.post('/add/pokemon', (req, res) => {
         type1: req.body.type1,
         type2: req.body.type2
     }).then(submittedPokemon => res.send(submittedPokemon));
+});
+
+app.post('/add/equipe', (req, res) => {
+    Team.create({
+        teamName: req.body.teamName,
+        idPokemon1: req.body.idPokemon1,
+        idPokemon2: req.body.idPokemon2,
+        idPokemon3: req.body.idPokemon3,
+        idPokemon4: req.body.idPokemon4,
+        idPokemon5: req.body.idPokemon5,
+        idPokemon6: req.body.idPokemon6,
+        token: req.body.token
+    }).then(submittedTeam => res.send(submittedTeam));
 });
 
 app.get('*', function (req, res) {

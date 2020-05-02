@@ -1,12 +1,14 @@
 const sequelize = require('../database/sequelize')
 const Sequelize = require("sequelize")
+const Pokemons = require('./pokemon')
 
-const Types = sequelize.define('type',
+const Team = sequelize.define('equipe',
     {
         id: {
             field: 'id',
             type: Sequelize.INTEGER,
-            primaryKey: true
+            primaryKey: true,
+            autoIncrement: true
         },
         teamName: {
             field: 'teamName',
@@ -43,3 +45,5 @@ const Types = sequelize.define('type',
     }, {
     timestamps: false
 });
+
+module.exports = Team
