@@ -18,27 +18,28 @@ app.get('/api/pokemons', function (req, res) {
 })
 
 app.get('/api/pokemon/num/:pkmnNum', function (req, res) {
-    Pokemons.findOne({
-        where: { pokedexNumber: req.params.pkmnNum }
-    }).then((pokemon) => {
-        if (pokemon === null) {
-            res.json({ error: "Le numéro rentré n'existe pas" })
-        } else {
-            res.json(pokemon)
-        }
+    Pokemons.findAll({
+        where: {
+            pokedexNumber: {
+                [Op.like]: req.params.pkmnNum +'%'
+            }
+        },
+        order: ["pokedexNumber"],
+    }).then((pokemons) => {
+        res.json(pokemons)
     })
 })
 
 app.get('/api/pokemon/name/:pkmnName', function (req, res) {
-    Pokemons.findOne({
-        where:
-            Sequelize.where(Sequelize.fn('lower', Sequelize.col('name')), req.params.pkmnName)
-    }).then((pokemon) => {
-        if (pokemon === null) {
-            res.json({ error: "Le nom rentré n'existe pas" })
-        } else {
-            res.json(pokemon)
-        }
+    Pokemons.findAll({
+        where: {
+            name: {
+                [Op.like]: req.params.pkmnName +'%'
+            }
+        },
+        order: ["pokedexNumber"],
+    }).then((pokemons) => {
+        res.json(pokemons)
     })
 })
 
