@@ -11,6 +11,12 @@
             <li>
               <router-link to="/equipes">Equipes</router-link>
             </li>
+            <li v-if="tokenUtilisateur == null">
+              <router-link to="/login">Connexion</router-link>
+            </li>
+            <li v-else>
+              <button @click="logout" class="waves-effect waves-light btn green">Deconnexion</button>
+            </li>
           </ul>
         </div>
       </nav>
@@ -18,3 +24,19 @@
     <router-view />
   </div>
 </template>
+
+<script>
+export default {
+  name: "App",
+  computed: {
+    tokenUtilisateur: function() {
+      return this.$store.state.token;
+    }
+  },
+  methods: {
+    logout() {
+      this.$store.commit("setToken", null);
+    }
+  }
+};
+</script>

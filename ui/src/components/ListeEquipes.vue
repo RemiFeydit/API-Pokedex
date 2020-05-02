@@ -93,11 +93,6 @@
 <script>
 export default {
   name: "ListePokemons",
-  data() {
-    return {
-      token: ""
-    };
-  },
   created() {
     this.$store.commit("getTypes", null);
   },
@@ -107,12 +102,14 @@ export default {
     },
     listePokemons: function() {
       return this.$store.state.listePokemons;
+    },
+    tokenUtilisateur: function() {
+      return this.$store.state.token;
     }
   },
   methods: {
     ajoutEquipe: function() {
-      let tokenUtilisateur = this.$store.state.token;
-      this.$store.commit("addEquipe", tokenUtilisateur);
+      this.$store.commit("addEquipe", this.tokenUtilisateur);
     },
     saveEquipe: function(index, equipe) {
       const pokemon1 = this.$refs.pokemon1[index].value;

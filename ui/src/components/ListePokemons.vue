@@ -1,6 +1,6 @@
 <template>
   <div class="pokemons">
-    <button @click="debug">debug</button>
+    <h2>Liste Pokemons</h2>
     <div class="row">
       <select v-model="selected" class="col s2">
         <option disabled value>Trier par type</option>
@@ -13,6 +13,7 @@
       <input v-model="inputPokemonSearch" :placeholder="rechercherPar" class="col s2" />
       <button class="btn" @click="rechercherPokemon">Rechercher</button>
     </div>
+
     <br />
     <table>
       <thead>
@@ -85,9 +86,6 @@ export default {
           this.inputPokemonSearch
         ]);
       }
-    },
-    debug: function() {
-      console.log(this.listePokemons);
     }
   }
 };

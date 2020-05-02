@@ -20,7 +20,7 @@ export default new Vuex.Store({
     listePokemons: null,
     listeTypes: null,
     listeEquipes: [],
-    token: 666,
+    token: null,
   },
   mutations: {
     async getPokemons(state, val) {
@@ -135,6 +135,9 @@ export default new Vuex.Store({
     },
     getEquipesBdd(state) {
       state.listeEquipes = [];
+    },
+    setToken(state, val) {
+      state.token = val;
     }
 
   },
