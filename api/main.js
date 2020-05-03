@@ -143,6 +143,18 @@ app.post('/add/equipe', (req, res) => {
     }).then(submittedTeam => res.send(submittedTeam));
 });
 
+
+app.get('/teams', function (req, res) {
+    Team.findAll({
+        where: {
+            token: req.query.id
+        }
+    }).then((teams) => {
+        res.json(teams)
+    })
+})
+
+
 // DELETE delete Team
 app.delete('/delete/team/:id', (req, res) => {
     Team.destroy({
