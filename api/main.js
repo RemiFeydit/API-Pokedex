@@ -186,6 +186,24 @@ app.post('/add/user', (req, res) => {
     }).then(submittedUser => res.send(submittedUser));
 });
 
+// LOGIN
+
+app.get('/login', function (req, res) {
+    User.findOne({
+        where: {
+            [Op.and]: [
+                { username: req.body.username},
+                { password: req.body.password}
+            ]
+        }
+    }).then((user) => {
+        if (user == null) {
+            res.json({login : false})
+        } else
+            res.json({login : true, id: user.id })
+    })
+})
+
 /// ERROR PATH
 
 app.get('*', function (req, res) {
