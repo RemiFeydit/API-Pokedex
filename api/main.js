@@ -13,6 +13,11 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json())
 
+
+
+/// POKEMONS
+
+// GET
 app.get('/api/pokemons', function (req, res) {
     Pokemons.findAll({
         order: ["pokedexNumber"]
@@ -20,6 +25,8 @@ app.get('/api/pokemons', function (req, res) {
         res.json(pokemons)
     })
 })
+
+// GET by numPokedex
 
 app.get('/api/pokemon/num/:pkmnNum', function (req, res) {
     Pokemons.findAll({
@@ -34,6 +41,8 @@ app.get('/api/pokemon/num/:pkmnNum', function (req, res) {
     })
 })
 
+// GET by name
+
 app.get('/api/pokemon/name/:pkmnName', function (req, res) {
     Pokemons.findAll({
         where: {
@@ -46,6 +55,8 @@ app.get('/api/pokemon/name/:pkmnName', function (req, res) {
         res.json(pokemons)
     })
 })
+
+//GET by type
 
 app.get('/api/pokemons/types/:type', function (req, res) {
     Pokemons.findAll({
@@ -61,13 +72,21 @@ app.get('/api/pokemons/types/:type', function (req, res) {
         } else
             res.json(pokemons)
     })
-}),
+})
 
-    app.get('/api/types', function (req, res) {
-        Types.findAll().then((types) => {
-            res.json(types)
-        })
+// DELETE pokemon
+
+app.delete('/delete/pokemon/:id', (req, res) => {
+    Pokemons.destroy({
+        where: {
+            id: req.params.id
+        }
+    }).then(() => {
+        res.send("success")
     })
+});
+
+// ADD pokemon
 
 app.post('/add/pokemon', (req, res) => {
     if (req.body.type2 == "") {
@@ -81,6 +100,33 @@ app.post('/add/pokemon', (req, res) => {
     }).then(submittedPokemon => res.send(submittedPokemon));
 });
 
+// UPDATE pokemon
+
+app.put('/edit/pokemon', (req, res) => {
+    Pokemons.update(
+        {
+            pokedexNumber: req.body.pokedexNumber,
+            name: req.body.name,
+            type1: req.body.type1,
+            type2: req.body.type2
+        },
+        {
+            where: { id:req.body.id }
+        }
+    ).then(()=>{
+        res.send("sucess")
+    })
+})
+
+/// TYPE
+app.get('/api/types', function (req, res) {
+    Types.findAll().then((types) => {
+        res.json(types)
+    })
+})
+
+/// TEAM
+
 app.post('/add/equipe', (req, res) => {
     Team.create({
         teamName: req.body.teamName,
@@ -93,6 +139,18 @@ app.post('/add/equipe', (req, res) => {
         token: req.body.token
     }).then(submittedTeam => res.send(submittedTeam));
 });
+
+app.delete('/delete/team/:id', (req, res) => {
+    Team.destroy({
+        where: {
+            id: req.params.id
+        }
+    }).then(() => {
+        res.send("success")
+    })
+});
+
+/// ERROR PATH
 
 app.get('*', function (req, res) {
     res.status(404).send("Page introuvable??")
