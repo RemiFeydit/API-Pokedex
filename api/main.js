@@ -57,6 +57,18 @@ app.get('/api/pokemon/name/:pkmnName', function (req, res) {
     })
 })
 
+app.get('/api/pokemon/id/:id', function (req, res) {
+    Pokemons.findOne({
+        where: {
+            id: {
+                [Op.like]: req.params.id
+            }
+        },
+    }).then((pokemon) => {
+        res.json(pokemon)
+    })
+})
+
 //GET by type
 
 app.get('/api/pokemons/types/:type', function (req, res) {
