@@ -127,6 +127,8 @@ app.get('/api/types', function (req, res) {
 
 /// TEAM
 
+// POST ADD Equipe
+
 app.post('/add/equipe', (req, res) => {
     Team.create({
         teamName: req.body.teamName,
@@ -140,6 +142,7 @@ app.post('/add/equipe', (req, res) => {
     }).then(submittedTeam => res.send(submittedTeam));
 });
 
+// DELETE delete Team
 app.delete('/delete/team/:id', (req, res) => {
     Team.destroy({
         where: {
@@ -149,6 +152,27 @@ app.delete('/delete/team/:id', (req, res) => {
         res.send("success")
     })
 });
+
+// PUT UPDATE Team
+
+app.put('/edit/team', (req, res) => {
+    Team.update(
+        {
+            teamName: req.body.teamName,
+            idPokemon1: req.body.idPokemon1,
+            idPokemon2: req.body.idPokemon2,
+            idPokemon3: req.body.idPokemon3,
+            idPokemon4: req.body.idPokemon4,
+            idPokemon5: req.body.idPokemon5,
+            idPokemon6: req.body.idPokemon6
+        },
+        {
+            where: { id:req.body.id }
+        }
+    ).then(()=>{
+        res.send("sucess")
+    })
+})
 
 /// ERROR PATH
 
