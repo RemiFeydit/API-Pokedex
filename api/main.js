@@ -147,7 +147,7 @@ app.post('/add/equipe', (req, res) => {
 app.get('/teams', function (req, res) {
     Team.findAll({
         where: {
-            token: req.query.id
+            token: req.body.token
         }
     }).then((teams) => {
         res.json(teams)
