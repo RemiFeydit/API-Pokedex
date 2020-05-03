@@ -5,6 +5,7 @@ const Pokemons = require("./models/pokemon")
 const app = express();
 const Types = require("./models/type")
 const Team = require('./models/equipe')
+const User = require('./models/user')
 
 const bodyParser = require('body-parser')
 
@@ -173,6 +174,17 @@ app.put('/edit/team', (req, res) => {
         res.send("sucess")
     })
 })
+
+/// USER
+
+// ADD
+
+app.post('/add/user', (req, res) => {
+    User.create({
+        username: req.body.username,
+        password: req.body.password
+    }).then(submittedUser => res.send(submittedUser));
+});
 
 /// ERROR PATH
 
