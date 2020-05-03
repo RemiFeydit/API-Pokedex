@@ -22,6 +22,7 @@
       </nav>
     </div>
     <router-view />
+    <notifications group="foo" type="success" position="bottom left" classes="notification" />
   </div>
 </template>
 
@@ -40,3 +41,19 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+.notification {
+  // Style of the notification itself
+
+  .notification-content {
+    color: white;
+    background: green;
+    height: 4em;
+    text-align: center;
+    font-size: 1.5em;
+    padding-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+}
+</style>

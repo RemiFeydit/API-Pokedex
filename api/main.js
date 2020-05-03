@@ -124,9 +124,9 @@ app.put('/edit/pokemon', (req, res) => {
             type2: req.body.type2
         },
         {
-            where: { id:req.body.id }
+            where: { id: req.body.id }
         }
-    ).then(()=>{
+    ).then(() => {
         res.send("sucess")
     })
 })
@@ -159,7 +159,7 @@ app.post('/add/equipe', (req, res) => {
 app.get('/teams', function (req, res) {
     Team.findAll({
         where: {
-            token: req.body.token
+            token: req.query.token
         }
     }).then((teams) => {
         res.json(teams)
@@ -192,9 +192,9 @@ app.put('/edit/team', (req, res) => {
             idPokemon6: req.body.idPokemon6
         },
         {
-            where: { id:req.body.id }
+            where: { id: req.body.id }
         }
-    ).then(()=>{
+    ).then(() => {
         res.send("sucess")
     })
 })
@@ -216,15 +216,15 @@ app.get('/login', function (req, res) {
     User.findOne({
         where: {
             [Op.and]: [
-                { username: req.body.username},
-                { password: req.body.password}
+                { username: req.query.username },
+                { password: req.query.password }
             ]
         }
     }).then((user) => {
         if (user == null) {
-            res.json({login : false})
+            res.json({ login: false })
         } else
-            res.json({login : true, id: user.id })
+            res.json({ login: true, id: user.id })
     })
 })
 

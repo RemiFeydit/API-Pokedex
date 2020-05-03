@@ -40,6 +40,11 @@ export default {
     addPokemon: function() {
       const axios = require("axios");
 
+      this.$notify({
+        group: "foo",
+        text: "Le pokémon a bien été ajouté."
+      });
+
       axios
         .post("http://localhost:3000/add/pokemon", {
           pokedexNumber: this.addNumber,
@@ -48,7 +53,7 @@ export default {
           type2: this.addType2
         })
         .then(() => {
-          this.addNumbern = "";
+          this.addNumber = "";
           this.addName = "";
           this.addType1 = "";
           this.addType2 = "";

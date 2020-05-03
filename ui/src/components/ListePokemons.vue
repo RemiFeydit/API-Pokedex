@@ -30,11 +30,40 @@
       </thead>
 
       <tbody>
-        <tr v-for="(pokemon) in listePokemons" :key="pokemon.id">
-          <td>{{ pokemon.pokedexNumber }}</td>
-          <td>{{ pokemon.name }}</td>
-          <td>{{ pokemon.type1 }}</td>
-          <td>{{ pokemon.type2 == null ? 'N/A' : pokemon.type2 }}</td>
+        <tr v-for="(pokemon, index) in listePokemons" :key="pokemon.id">
+          <td>
+            <input
+              type="text"
+              ref="nbrPokedex"
+              :value="pokemon.pokedexNumber"
+              @keyup.enter="updatePokemon(index, pokemon.id)"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              ref="namePokemon"
+              :value="pokemon.name"
+              @keyup.enter="updatePokemon(index, pokemon.id)"
+            />
+          </td>
+          <td>
+            <select class="col s2" ref="type1Pokemon">
+              <option>{{pokemon.type1}}</option>
+              <option v-for="(type) in listeTypes" :key="type.id">{{ type.name }}</option>
+            </select>
+          </td>
+          <td>
+            <select class="col s2" ref="type2Pokemon" @change="updatePokemon(index, pokemon.id)">
+              <option>{{pokemon.type2 == null ? 'N/A' : pokemon.type2}}</option>
+              <option v-for="(type) in listeTypes" :key="type.id">{{ type.name }}</option>
+            </select>
+          </td>
+          <td>
+            <div class="row">
+              <button class="btn red col s10 offset-s1" @click="deletePokemon(pokemon.id)">Supprimer</button>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -91,6 +120,34 @@ export default {
           this.filtreRecherche,
           this.inputPokemonSearch
         ]);
+      }
+    },
+    updatePokemon: function(index, idPokemon) {
+      const nbrPokedex = this.$refs.nbrPokedex[index].value;
+      const namePokemon = this.$refs.namePokemon[index].value;
+      const type1Pokemon = this.$refs.type1Pokemon[index].value;
+      const type2Pokemon = this.$refs.type2Pokemon[index].value;
+
+      this.$notify({
+        group: "foo",
+        text: "Le pokémon a bien été mis à jour."
+      });
+
+      this.$store.dispatch("updatePokemon", [
+        nbrPokedex,
+        namePokemon,
+        type1Pokemon,
+        type2Pokemon,
+        idPokemon
+      ]);
+    },
+    deletePokemon: function(idPokemon) {
+      if (confirm("Voulez-vous vraiment supprimer ce pokémon ?")) {
+        this.$notify({
+          group: "foo",
+          text: "Le pokémon a bien été supprimé."
+        });
+        this.$store.dispatch("deletePokemon", idPokemon);
       }
     }
   }

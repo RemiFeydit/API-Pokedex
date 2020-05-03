@@ -6,11 +6,11 @@
         <div class="col s6">
           <div class="card white darken-1 center">
             <select ref="pokemon1">
-              <option :value="equipe.pokedexNumber">{{equipe.Pokemon1.name}}</option>
+              <option :value="equipe.Pokemon1.id">{{equipe.Pokemon1.name}}</option>
               <option
                 v-for="(pokemon) in listePokemons"
                 :key="pokemon.id"
-                :value="pokemon.pokedexNumber"
+                :value="pokemon.id"
               >{{ pokemon.name }}</option>
             </select>
           </div>
@@ -22,7 +22,7 @@
               <option
                 v-for="(pokemon) in listePokemons"
                 :key="pokemon.id"
-                :value="pokemon.pokedexNumber"
+                :value="pokemon.id"
               >{{ pokemon.name }}</option>
             </select>
           </div>
@@ -35,7 +35,7 @@
               <option
                 v-for="(pokemon) in listePokemons"
                 :key="pokemon.id"
-                :value="pokemon.pokedexNumber"
+                :value="pokemon.id"
               >{{ pokemon.name }}</option>
             </select>
           </div>
@@ -47,7 +47,7 @@
               <option
                 v-for="(pokemon) in listePokemons"
                 :key="pokemon.id"
-                :value="pokemon.pokedexNumber"
+                :value="pokemon.id"
               >{{ pokemon.name }}</option>
             </select>
           </div>
@@ -60,7 +60,7 @@
               <option
                 v-for="(pokemon) in listePokemons"
                 :key="pokemon.id"
-                :value="pokemon.pokedexNumber"
+                :value="pokemon.id"
               >{{ pokemon.name }}</option>
             </select>
           </div>
@@ -72,7 +72,7 @@
               <option
                 v-for="(pokemon) in listePokemons"
                 :key="pokemon.id"
-                :value="pokemon.pokedexNumber"
+                :value="pokemon.id"
               >{{ pokemon.name }}</option>
             </select>
           </div>
@@ -95,6 +95,7 @@ export default {
   name: "ListePokemons",
   created() {
     this.$store.commit("getTypes", null);
+    this.$store.commit("getEquipesBdd");
   },
   computed: {
     listeEquipes: function() {
@@ -130,6 +131,11 @@ export default {
         pokemon6,
         nomTeam
       ];
+
+      this.$notify({
+        group: "foo",
+        text: "Équipe sauvegardée ! "
+      });
 
       this.$store.commit("saveEquipe", listePokemonUpdate);
     },
