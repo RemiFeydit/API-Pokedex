@@ -52,10 +52,10 @@
           <td>
             <div class="row">
               <button
-                class="btn green col s10 offset-s1"
+                class="btn green col s4 offset-s1"
                 @click="updatePokemon(index, pokemon.id)"
               >Sauvegarder</button>
-              <button class="btn red col s10 offset-s1" @click="deletePokemon(pokemon.id)">Supprimer</button>
+              <button class="btn red col s4 offset-s1" @click="deletePokemon(pokemon.id)">Supprimer</button>
             </div>
           </td>
         </tr>
@@ -123,6 +123,8 @@ export default {
       const namePokemon = this.$refs.namePokemon[index].value;
       const type1Pokemon = this.$refs.type1Pokemon[index].value;
       const type2Pokemon = this.$refs.type2Pokemon[index].value;
+
+      console.log(nbrPokedex, namePokemon, type1Pokemon, type2Pokemon);
 
       this.$notify({
         group: "foo",
