@@ -18,15 +18,15 @@ L'api est accessible via le localhost sur le port 3000. http://localhost:3000/
 ## Details du projet:
 ### Fonctionalités
 
-Ce projet consiste à avoir accès à une base de données listant des pokémon.  
-On y retrouve pour chaque pokémon leur nom, numéro de pokédex, premier type et deuxième type.  
+Ce projet consiste à avoir accès à une base de donnée listant des pokémons.  
+On y retrouve pour chaque pokémon leur noms, numéro de pokédex, premier type et deuxième type.  
   
-Le front permet facilement d'ajouter, modifier ou supprimer des pokémon grâce à l'api.  
+Le front permet facilement d'ajouter, modifier ou supprimer des pokémons grâce à l'api.  
 
 Il est possible de se créer un compte permettant ainsi de se créer des équipes.
-Chaque équipe peu avoir un nom et au maximun 6 pokémon.
-En dessous de chaque équipe se trouve un message indiquant si votre équipe manque de type super efficace contre d'autres type. 
-Par exemple si aucun pokémon ne possède de type super efficace contre le feu, le message sous l'équipe en question l'inqiquera.
+Chaque équipe peut avoir un nom et au maximum 6 pokémons.
+En dessous de chaque équipe se trouve un message indiquant si votre équipe manque de type super efficace contre d'autres types. 
+Par exemple si aucuns pokémons ne possèdent de types super efficaces contre le feu, le message sous l'équipe en question l'indiquera.
 
 ### Les routes
 
@@ -37,10 +37,10 @@ Pour les pokémons :
 
 Get:
 * Récupérer tous les pokémons: `/api/pokemons`  
-* Récupérer les pokémon via leur numéro de pokédex: `/api/pokemon/num/:pkmnNum`  
-* Récupérer les pokémon via leur nom: `/api/pokemon/name/:pkmnName`  
-* Récupérer les pokémon via leur id: `/api/pokemon/id/:id`  
-* Récupérer les pokémon via leur type: `/api/pokemons/types/:type`  
+* Récupérer les pokémons via leurs numéros de pokédex: `/api/pokemon/num/:pkmnNum`  
+* Récupérer les pokémons via leurs nom: `/api/pokemon/name/:pkmnName`  
+* Récupérer les pokémons via leurs id: `/api/pokemon/id/:id`  
+* Récupérer les pokémons via leurs types: `/api/pokemons/types/:type`  
 
 Delete:
 * Supprimer un pokémon: `/delete/pokemon/:id`  
