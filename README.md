@@ -31,6 +31,7 @@ Par exemple si aucuns pokémons ne possèdent de types super efficaces contre le
 ### Les routes
 
 L'api est fait avec expressjs. 
+On a utilisé Vuejs pour le front.  
 Voici les différentes routes proposés:  
   
 Pour les pokémons :  
