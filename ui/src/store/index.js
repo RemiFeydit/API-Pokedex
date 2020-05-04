@@ -105,7 +105,6 @@ export default new Vuex.Store({
       state.listeEquipes.push(equipe);
     },
     async saveEquipe(state, val) {
-      const axios = require('axios');
       const Pokemon1 = val[1]
       const Pokemon2 = val[2]
       const Pokemon3 = val[3]
@@ -127,6 +126,7 @@ export default new Vuex.Store({
             token: state.token,
           })
       } else {
+        console.log(val[0].id, Pokemon1, Pokemon2, Pokemon3, Pokemon4, Pokemon5, Pokemon6);
         await axios.put("http://localhost:3000/edit/team", {
           id: val[0].id,
           teamName: nomTeam,

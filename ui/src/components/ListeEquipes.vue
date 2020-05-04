@@ -5,7 +5,7 @@
       <div class="row">
         <div class="col s6">
           <div class="card white darken-1 center">
-            <select ref="pokemon1">
+            <select ref="pokemon1" :value="equipe.Pokemon1.id">
               <option :value="equipe.Pokemon1.id">{{equipe.Pokemon1.name}}</option>
               <option
                 v-for="(pokemon) in listePokemons"
@@ -17,8 +17,8 @@
         </div>
         <div class="col s6">
           <div class="card white darken-1 center">
-            <select ref="pokemon2">
-              <option :value="equipe.pokedexNumber">{{equipe.Pokemon2.name}}</option>
+            <select ref="pokemon2" :value="equipe.Pokemon2.id">
+              <option :value="equipe.Pokemon2.id">{{equipe.Pokemon2.name}}</option>
               <option
                 v-for="(pokemon) in listePokemons"
                 :key="pokemon.id"
@@ -30,8 +30,8 @@
 
         <div class="col s6">
           <div class="card white darken-1 center">
-            <select ref="pokemon3">
-              <option :value="equipe.pokedexNumber">{{equipe.Pokemon3.name}}</option>
+            <select ref="pokemon3" :value="equipe.Pokemon3.id">
+              <option :value="equipe.Pokemon3.id">{{equipe.Pokemon3.name}}</option>
               <option
                 v-for="(pokemon) in listePokemons"
                 :key="pokemon.id"
@@ -42,8 +42,8 @@
         </div>
         <div class="col s6">
           <div class="card white darken-1 center">
-            <select ref="pokemon4">
-              <option :value="equipe.pokedexNumber">{{equipe.Pokemon4.name}}</option>
+            <select ref="pokemon4" :value="equipe.Pokemon4.id">
+              <option :value="equipe.Pokemon4.id">{{equipe.Pokemon4.name}}</option>
               <option
                 v-for="(pokemon) in listePokemons"
                 :key="pokemon.id"
@@ -55,8 +55,8 @@
 
         <div class="col s6">
           <div class="card white darken-1 center">
-            <select ref="pokemon5">
-              <option :value="equipe.pokedexNumber">{{equipe.Pokemon5.name}}</option>
+            <select ref="pokemon5" :value="equipe.Pokemon5.id">
+              <option :value="equipe.Pokemon5.id">{{equipe.Pokemon5.name}}</option>
               <option
                 v-for="(pokemon) in listePokemons"
                 :key="pokemon.id"
@@ -67,8 +67,8 @@
         </div>
         <div class="col s6">
           <div class="card white darken-1 center">
-            <select ref="pokemon6">
-              <option :value="equipe.pokedexNumber">{{equipe.Pokemon6.name}}</option>
+            <select ref="pokemon6" :value="equipe.Pokemon6.id">
+              <option :value="equipe.Pokemon6.id">{{equipe.Pokemon6.name}}</option>
               <option
                 v-for="(pokemon) in listePokemons"
                 :key="pokemon.id"

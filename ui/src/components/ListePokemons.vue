@@ -3,7 +3,7 @@
     <h2>Liste Pokemons</h2>
     <div class="row">
       <select v-model="selected" class="col s2">
-        <option disabled value>Trier par type</option>
+        <option value>Trier par type</option>
         <option v-for="(type) in listeTypes" :key="type.id">{{ type.name }}</option>
       </select>
       <select v-model="filtreRecherche" class="col s2 offset-s1">
@@ -32,20 +32,10 @@
       <tbody>
         <tr v-for="(pokemon, index) in listePokemons" :key="pokemon.id">
           <td>
-            <input
-              type="text"
-              ref="nbrPokedex"
-              :value="pokemon.pokedexNumber"
-              @keyup.enter="updatePokemon(index, pokemon.id)"
-            />
+            <input type="text" ref="nbrPokedex" :value="pokemon.pokedexNumber" />
           </td>
           <td>
-            <input
-              type="text"
-              ref="namePokemon"
-              :value="pokemon.name"
-              @keyup.enter="updatePokemon(index, pokemon.id)"
-            />
+            <input type="text" ref="namePokemon" :value="pokemon.name" />
           </td>
           <td>
             <select class="col s2" ref="type1Pokemon">
@@ -54,13 +44,17 @@
             </select>
           </td>
           <td>
-            <select class="col s2" ref="type2Pokemon" @change="updatePokemon(index, pokemon.id)">
+            <select class="col s2" ref="type2Pokemon">
               <option>{{pokemon.type2 == null ? 'N/A' : pokemon.type2}}</option>
               <option v-for="(type) in listeTypes" :key="type.id">{{ type.name }}</option>
             </select>
           </td>
           <td>
             <div class="row">
+              <button
+                class="btn green col s10 offset-s1"
+                @click="updatePokemon(index, pokemon.id)"
+              >Sauvegarder</button>
               <button class="btn red col s10 offset-s1" @click="deletePokemon(pokemon.id)">Supprimer</button>
             </div>
           </td>
@@ -104,8 +98,10 @@ export default {
       if (val != "") {
         this.filtreRecherche = "";
         this.inputPokemonSearch = "";
+        this.$store.commit("getPokemons", ["type", val.toLowerCase()]);
+      } else {
+        this.$store.commit("getPokemons", [null]);
       }
-      this.$store.commit("getPokemons", ["type", val.toLowerCase()]);
     }
   },
   methods: {
