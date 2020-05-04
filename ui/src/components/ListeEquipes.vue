@@ -77,6 +77,9 @@
             </select>
           </div>
         </div>
+        <div class="col s12">
+          <span>{{equipe.conseil}}</span>
+        </div>
       </div>
       <div class="center">
         <button class="btn" @click="saveEquipe(index, equipe)">Sauvegarder</button>
