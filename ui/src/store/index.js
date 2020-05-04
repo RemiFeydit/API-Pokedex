@@ -26,18 +26,28 @@ export default new Vuex.Store({
     },
     mutations: {
         async getPokemons(state, val) {
-            if (val[0] === null) {
-                let dataPokemon = await axios.get(`http://localhost:3000/api/pokemons`);
-                state.listePokemons = dataPokemon.data;
-            } else if (val[0] === "type") {
-                let dataPokemon = await axios.get(`http://localhost:3000/api/pokemons/types/${val[1]}`);
-                state.listePokemons = dataPokemon.data;
-            } else if (val[0] === "Numéro Pokédex") {
-                let dataPokemon = await axios.get(`http://localhost:3000/api/pokemon/num/${val[1]}`);
-                state.listePokemons = dataPokemon.data;
-            } else {
-                let dataPokemon = await axios.get(`http://localhost:3000/api/pokemon/name/${val[1]}`);
-                state.listePokemons = dataPokemon.data;
+
+            switch (val[0]) {
+                case null: {
+                    let dataPokemon = await axios.get(`http://localhost:3000/api/pokemons`);
+                    state.listePokemons = dataPokemon.data;
+                    break;
+                }
+                case "type": {
+                    let dataPokemon = await axios.get(`http://localhost:3000/api/pokemons/types/${val[1]}`);
+                    state.listePokemons = dataPokemon.data;
+                    break;
+                }
+                case "Numéro Pokédex": {
+                    let dataPokemon = await axios.get(`http://localhost:3000/api/pokemon/num/${val[1]}`);
+                    state.listePokemons = dataPokemon.data;
+                    break;
+                }
+                default: {
+                    let dataPokemon = await axios.get(`http://localhost:3000/api/pokemon/name/${val[1]}`);
+                    state.listePokemons = dataPokemon.data;
+                    break;
+                }
             }
         },
 
@@ -126,7 +136,6 @@ export default new Vuex.Store({
                         token: state.token,
                     })
             } else {
-                console.log(val[0].id, Pokemon1, Pokemon2, Pokemon3, Pokemon4, Pokemon5, Pokemon6);
                 await axios.put("http://localhost:3000/edit/team", {
                     id: val[0].id,
                     teamName: nomTeam,

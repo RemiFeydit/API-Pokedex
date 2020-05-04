@@ -124,8 +124,6 @@ export default {
       const type1Pokemon = this.$refs.type1Pokemon[index].value;
       const type2Pokemon = this.$refs.type2Pokemon[index].value;
 
-      console.log(nbrPokedex, namePokemon, type1Pokemon, type2Pokemon);
-
       this.$notify({
         group: "foo",
         text: "Le pokémon a bien été mis à jour."
